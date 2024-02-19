@@ -1,0 +1,84 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "",
+    "version" : "1.0.0",
+    "title" : "Api Documentation"
+  },
+  "host" : "localhost",
+  "basePath" : "/",
+  "tags" : [ {
+    "name" : "MyController"
+  } ],
+  "schemes" : [ "http", "https" ],
+  "paths" : {
+    "/persons" : {
+      "get" : {
+        "tags" : [ "MyController" ],
+        "operationId" : "findPersons",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "requestParams",
+          "in" : "query",
+          "required" : false,
+          "type" : "object"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Person"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ]
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "api_key" : {
+      "type" : "apiKey",
+      "name" : "Authorization",
+      "in" : "header"
+    }
+  },
+  "definitions" : {
+    "Company" : {
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "employees" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "Person" : {
+      "properties" : {
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "birthDate" : {
+          "type" : "string",
+          "format" : "data-time",
+          "example" : "2018-09-10T13:11:43Z"
+        },
+        "country" : {
+          "type" : "string"
+        },
+        "company" : {
+          "$ref" : "#/definitions/Company"
+        }
+      }
+    }
+  }
+}
